@@ -21,7 +21,7 @@ public class KakaoAddressSearchService {
     private final RestTemplate restTemplate;
     private final KakaoUriBuilderService kakaoUriBuilderService;
 
-    @Value("{kakao.rest.api.ket}")
+    @Value("${kakao.rest.api.key}")
     private String kakaoRestApiKey;
 
     public KakaoApiResponseDto requestAddressSearch(String address) {
