@@ -65,4 +65,10 @@ public class PharmacyRepositoryService {
         entity.changePharmacyAddress(address);
     }
 
+    @Transactional(readOnly = true)
+    public List<Pharmacy> findAll() {
+
+        return pharmacyRepository.findAll();
+    }
+
 }
