@@ -66,3 +66,37 @@
 > - <b>영속성 컨텍스트에 처음 저장된 순간 스냅샷을 저장해놓고, 트랜잭션이 끝나는 시점에 비교하여 변경된 부분을 쿼리로 새성하여 데이터베이스로 반영</b> 한다.
 > - <b>즉, 영속 상태가 아닐 경우, 값을 변경해도 데이터베이스에 반영되지 않는다.</b>
 > - <b>트랜잭션이 없이 데이터 반영이 일어나지 않는다.</b>
+<hr>
+
+### Spring Transactional 이란?
+> - `Spring` 에서 `Transaction` 처리를 `@Transactional` 어노테이션을 이용하여 처리
+> - `@Transactional` 은 `Spring AOP` 기반이며, `Spring AOP` 는 `Proxy` 기반으로 동작
+> - <b>`@Transactional` 이 포함된 메서드가 호출될 경우, `Proxy` 객체를 생성함으로써 `Transaction` 생성 및 커밋 또는 롤백 후 `Transaction` 닫는 부수적인 작업을 `Proxy` 객체에게 위임</b>
+> - `Proxy` 의 핵심적인 기능은 지정된 메서드 호출(`Invocation`) 될 때, 이 메서드를 가로채어 부가 기능들을 `Proxy` 객체에게 위임
+> - 즉, 개발자가 메서드에 `@Transactional` 만 선언하고, 비지니스 로직에 집중 가능!
+<hr>
+
+### Spring Transactional 주의사항
+> - https://tedblob.com/spring-aop-proxy
+> - Spring `AOP` 기반으로 하는 기능들 (`@Transactional`, `@Cacheable`, `@Async`) 사용 시 `Self Invocation` 문제로 인하여 장애가 발생할 수 있음
+> - 메서드가 호출되는 시점에 프록시 객체를 생성하고, 프록시 객체는 부가 기능 (`Transaction`) 을 주입해 준다.
+> - 외부에서 `bar()` 메서드를 실행할 때 정상적으로 프록시가 동작
+> - 하지만, `@Transactional` 을 `foo()` 에만 선언하고 외부에서 `bar()` 를 호출하고, `bar() -> foo()` 호출했다면?
+<hr>
+
+### Self Invocation 해결 방법
+> - 트랜잭션 위치를 외부에서 호출하는 `bar()` 메서드로 이동
+> - 객체의 책임을 최대한 분리하여 외부 호출하도록 리팩토링
+<hr>
+
+### Spring Transaction 주의사항 (읽기 전용)
+> - `@Transactional(readOnly - true)` 스프링에서 트랜잭션을 읽기 전용으로 설정 가능
+> - 읽기 전용으로 설정하게 되면, JPA 에서 스냅샷 저장 및 `Dirty Checking` 작업을 수행하지 않기 때문에 성능적으로 이점
+> - 따라서, `Dirty Checking` 불가
+<hr>
+
+### Spring Transactional 주의사항 (우선순위)
+> - `@Transactional` 은 적용 우선순위를 가지고 있으며, 클래스 보다 메서드가 우선순위가 높다
+> - 클래스에 `@Transactional(readOnly = true)` (읽기전용) 으로 적용해 놓고, `update` 가 발생하는 메서드에만 `readOnly = false` 우선 적용 (`SimpleJpaRepository`)
+<hr>
+
