@@ -15,3 +15,22 @@
 > - 터미널 접속 -> `docker ps` -> `docker exec -it { CONTAINER ID } bash`
 > - `mysql uroot -p` -> password 입력
 > - `show databases;` -> `use pharmacy-recommendation` -> `show tables;` -> `select * from pharmacy;`
+<hr>
+
+### 거리 계산 알고리즘 구현
+> - https://en.wikipedia.org/wiki/Haversine_formula
+> - <b>두 위도, 경도 사이의 거리를 계산하기 위한 알고리즘</b>
+> - `Haversine formula` 알고리즘은 지구를 완전한 구 라고 가정하고 계산하기 때문에 0.5% 정도 오차가 발생 가능
+> - 해당 프로젝트에서 약간의 오차는 이슈가 없기 때문에 아래와 같이 구현
+> ```java
+> // Haversine formula
+> private double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+>   lat1 = Math.toRadians(lat1);
+>   lon1 = Math.toRadians(lon1);
+>   lat2 = Math.toRadians(lat2);
+>   lon2 = Math.toRadians(lon2);
+> 
+>   double earthRadius = 6371;  // Kilometers
+>   return earthRadius * Math.acos(Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon1 - lon2));
+> }
+> ```
