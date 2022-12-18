@@ -26,7 +26,6 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.retry:spring-retry'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
@@ -43,6 +42,13 @@ dependencies {
     // testcontainers
     testImplementation 'org.testcontainers:spock:1.17.1'
     testImplementation 'org.testcontainers:mariadb:1.17.1'
+
+    // spring retry
+    implementation 'org.springframework.retry:spring-retry'
+
+    // mockWebServer
+    testImplementation('com.squareup.okhttp3:okhttp:4.10.0')
+    testImplementation('com.squareup.okhttp3:mockwebserver:4.10.0')
 }
 
 tasks.named('test') {
