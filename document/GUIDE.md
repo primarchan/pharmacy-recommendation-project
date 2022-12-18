@@ -34,3 +34,8 @@
 >   return earthRadius * Math.acos(Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon1 - lon2));
 > }
 > ```
+<hr>
+
+### Spring Retry 소개
+> - https://wonyong-jang.github.io/spring/2021/02/18/Spring-Retry.html
+> - https://github.com/spring-projects/spring-retry
