@@ -2,13 +2,18 @@ package com.example.pharmacyrecommendationproject.domain.direction.service;
 
 import com.example.pharmacyrecommendationproject.api.dto.DocumentDto;
 import com.example.pharmacyrecommendationproject.domain.direction.entity.Direction;
-import com.example.pharmacyrecommendationproject.domain.pharmacy.dto.PharmacyDto;
+import com.example.pharmacyrecommendationproject.domain.direction.repository.DirectionRepository;
 import com.example.pharmacyrecommendationproject.domain.pharmacy.service.PharmacySearchService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -19,6 +24,16 @@ public class DirectionService {
     private static final int MAX_SEARCH_COUNT = 3; // 약국 최대 검색 갯수
     private static final double RADIUS_KM = 10.0; // 반경 10 km 이내
     private final PharmacySearchService pharmacySearchService;
+    private final DirectionRepository directionRepository;
+
+    @Transactional
+    public List<Direction> saveAll(List<Direction> directionList) {
+        if (CollectionUtils.isEmpty(directionList)) {
+            return Collections.emptyList();
+        }
+
+        return directionRepository.saveAll(directionList);
+    }
 
     public List<Direction> buildDirectionList(DocumentDto documentDto) {
         if (Objects.isNull(documentDto)) {
@@ -46,7 +61,7 @@ public class DirectionService {
                 .collect(Collectors.toList());
     }
 
-    // Haversine formula
+    // Haversine Formula
     private double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
         lat1 = Math.toRadians(lat1);
         lon1 = Math.toRadians(lon1);
