@@ -40,7 +40,8 @@ public class PharmacyRecommendationService {
         DocumentDto documentDto = kakaoApiResponseDto.getDocumentDtoList().get(0);
 
         // 거리 계산 알고리즘을 통해 가장 가까운 약국 목록(3개)
-        List<Direction> directionList = directionService.buildDirectionList(documentDto);
+        // List<Direction> directionList = directionService.buildDirectionList(documentDto);
+        List<Direction> directionList = directionService.buildDirectionListByCategoryApi(documentDto);
 
         directionService.saveAll(directionList);
     }
