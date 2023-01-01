@@ -35,7 +35,7 @@ spring:
     port: 6379
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create
     show-sql: true
 
 ---

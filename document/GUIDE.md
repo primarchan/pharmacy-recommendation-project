@@ -13,8 +13,8 @@
 ### Docker 세팅 확인
 > - `docker-compose -f docker-compose-local.yml up`
 > - 터미널 접속 -> `docker ps` -> `docker exec -it { CONTAINER ID } bash`
-> - `mysql uroot -p` -> password 입력
-> - `show databases;` -> `use pharmacy-recommendation` -> `show tables;` -> `select * from pharmacy;`
+> - `mysql -u root -p` -> password 입력
+> - `show databases;` -> `use pharmacy_recommendation` -> `show tables;` -> `select * from pharmacy;`
 <hr>
 
 ### 거리 계산 알고리즘 구현
