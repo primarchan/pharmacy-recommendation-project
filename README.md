@@ -151,5 +151,12 @@
 > - 클래스에 `@Transactional(readOnly = true)` (읽기전용) 으로 적용해 놓고, `update` 가 발생하는 메서드에만 `readOnly = false` 우선 적용 (`SimpleJpaRepository`)
 <hr>
 
+### MockMvc 를 이용한 테스트 코드 작성
+> - 스프링 MVC 를 모킹하여 웹 어플리케이션을 테스트할 수 있는 도구
+> - 컨트롤러 레이어를 테스트 하기 위해 사용
+> - 매번 직접 서버를 띄우고 브라우저를 통해서 테스트하지 않고 테스트 코드를 통해 검증 가능
+> - [참고자료](https://wonyong-jang.github.io/spring/2022/07/08/Spring-MockMvc.html)
+<hr>
+
 </div>
 </details>
