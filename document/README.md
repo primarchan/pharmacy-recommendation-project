@@ -1,3 +1,6 @@
+# 약국 길찾기 서비스(Kakao Open API)
+<hr>
+
 ### 공공기관 데이터 약국 데이터 셋업 (방법 1)
 > - https://www.data.go.kr/data/15065023/fileData.do
 > - 직접 `SQL` 생성하여 저장하는 방법
