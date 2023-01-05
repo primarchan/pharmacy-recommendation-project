@@ -29,10 +29,10 @@ public class KakaoUriBuilderService {
 
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(KAKAO_LOCAL_CATEGORY_SEARCH_URL);
         uriBuilder.queryParam("category_group_code", category);
-        uriBuilder.queryParam("x", latitude);
-        uriBuilder.queryParam("y", longitude);
+        uriBuilder.queryParam("x", longitude);
+        uriBuilder.queryParam("y", latitude);
         uriBuilder.queryParam("radius", meterRadius);
-        uriBuilder.queryParam("sort", "distance");
+        uriBuilder.queryParam("sort","distance");
 
         URI uri = uriBuilder.build().encode().toUri();
         log.info("[KakaoUriBuilderService buildUriByCategorySearch] URI : {}", uri);
