@@ -20,6 +20,13 @@
 > - `show databases;` -> `use pharmacy_recommendation` -> `show tables;` -> `select * from pharmacy;`
 <hr>
 
+## Build 가이드
+> - MacOS: `./gradlew clean build`
+> - Window: `gradlew clean build`
+> - 전체 테스트 코드 실행을 위한 API KEY 적용 커맨드
+> `.gradlew clean build -PKAKAO_REST_API_KEY={key}`
+<hr>
+
 ## 거리 계산 알고리즘 구현
 > - https://en.wikipedia.org/wiki/Haversine_formula
 > - <b>두 위도, 경도 사이의 거리를 계산하기 위한 알고리즘</b>
