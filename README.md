@@ -44,6 +44,18 @@
 > - https://github.com/spring-projects/spring-retry
 <hr>
 
+## Shorten URL 개발
+> - 주로 모바일 등으로 `URL` 을 공유하고자 할 때, 긴 `URL` 을 줄여서 제공
+> - <b>요청 `URL` 에 대응하는 `Unique` 한 식별자가 필요</b>
+> 1. `DB` 에 길 안내 정보 (위도, 경도, 약국정보) 를 저장하고, `PK` 를 사용하는 방법  
+> ex) `http://localhost:8080/dir/10000000`  
+> 10진수 보다 더 간결한 64진수 또는 62진수
+> 2. `Base64` 사용  
+> "=" 등은 `URL` 예약어이기 때문에 부적절  
+> 3. `Base62` 사용  
+> ex) `http://localhost:8080/dir/raad21`  
+<hr>
+
 ## 프로젝트 관련 학습 자료
 <details>
 <summary><b>내용 상세 보기 (클릭) </b></summary>

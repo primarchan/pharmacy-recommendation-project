@@ -5,9 +5,11 @@ import com.example.pharmacyrecommendationproject.api.dto.KakaoApiResponseDto;
 import com.example.pharmacyrecommendationproject.api.service.KakaoAddressSearchService;
 import com.example.pharmacyrecommendationproject.domain.direction.dto.OutputDto;
 import com.example.pharmacyrecommendationproject.domain.direction.entity.Direction;
+import com.example.pharmacyrecommendationproject.domain.direction.service.Base62Service;
 import com.example.pharmacyrecommendationproject.domain.direction.service.DirectionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -24,8 +26,10 @@ public class PharmacyRecommendationService {
 
     private final KakaoAddressSearchService kakaoAddressSearchService;
     private final DirectionService directionService;
+    private final Base62Service base62Service;
     private static final String ROAD_VIEW_BASE_URL = "https://map.kakao.com/link/roadview/";
-    private static final String DIRECTION_BASE_URL = "https://map.kakao.com/link/map/";
+    @Value("${pharmacy.recommendation.base.url}")
+    private String baseUrl;
 
     /**
      * @apiNote 고객으로 입력받은 주소를 기준으로 가장 가까운 약국 목록(3개) 추천
@@ -56,17 +60,10 @@ public class PharmacyRecommendationService {
 
     private OutputDto convertToOutputDto(Direction direction) {
 
-        String params = String.join(",", direction.getTargetPharmacyName(),
-                String.valueOf(direction.getTargetLatitude()), String.valueOf(direction.getTargetLongitude()));
-
-        String result = UriComponentsBuilder.fromHttpUrl(DIRECTION_BASE_URL + params).toUriString();
-
-        log.info("direction params: {}, url: {}", params, result);
-
         return OutputDto.builder()
                 .pharmacyName(direction.getTargetPharmacyName())
                 .pharmacyAddress(direction.getTargetAddress())
-                .directionUrl(result)
+                .directionUrl(baseUrl + base62Service.encodeDirectionId(direction.getId())) // Shorten URL 로 제공
                 .roadViewUrl(ROAD_VIEW_BASE_URL + direction.getTargetLatitude() + "," + direction.getTargetLongitude())
                 .distance(String.format("%.2f km", direction.getDistance()))
                 .build();
