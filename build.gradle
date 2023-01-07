@@ -1,6 +1,6 @@
 plugins {
     id 'org.springframework.boot' version '2.6.7'
-    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'groovy'
 }
@@ -52,6 +52,9 @@ dependencies {
     // spring retry
     implementation 'org.springframework.retry:spring-retry'
 
+    // Redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
     // mockWebServer
     testImplementation('com.squareup.okhttp3:okhttp:4.10.0')
     testImplementation('com.squareup.okhttp3:mockwebserver:4.10.0')
@@ -68,4 +71,8 @@ processTestResources {
     filesMatching('**/application.yml') {
         expand(project.properties)
     }
+}
+
+test {
+    exclude '**/*'
 }

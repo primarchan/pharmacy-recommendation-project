@@ -25,6 +25,8 @@
 > - Window: `gradlew clean build`
 > - 전체 테스트 코드 실행을 위한 API KEY 적용 커맨드
 > `.gradlew clean build -PKAKAO_REST_API_KEY={key}`
+> - 테스트 제외 빌드 커맨드  
+> `./gradlew clean build -x test -PKAKAO_REST_API_KEY={key}`
 <hr>
 
 ## 거리 계산 알고리즘 구현
