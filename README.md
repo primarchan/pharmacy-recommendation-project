@@ -63,6 +63,33 @@
 > ex) `http://localhost:8080/dir/raad21`  
 <hr>
 
+## Redis (Remote Dictionary Server) 소개
+> - `Redis` 란 오픈소이며, `In-Memory` 데이터베이스로써 다양한 자료구조를 제공
+> - `https://redis.io/docs/data-types/tutorial`
+> 메모리 접근이 디스크 접근보다 빠르기 때문에 데이터베이스 (MySQL, Oracle...) 보다 빠르다.
+> - <b>매번 `Request` 마다 약국 데이터를 `DB` 에서 조회, 거리계산 알고리즘 계산 및 정렬 후 결과값 반환</b>
+> - 본 프로젝트에서 현재 약국 도메인 데이터가 크지 않기 때문에 Redis 사용은 Optional
+> - 데이터가 큰 경우 이를 매번 DB 조회하는 부분을 메모리에 캐싱하여 성능 향상 가능
+> - `Redis` 캐싱을 이용하여 성능을 개선하고자 할 때, <b>캐싱 데이터는 `Update` 가 자주 일어나지 않는 데이터가 효과적</b>
+> - 너무 많은 `Update` 가 일어나는 데이터일 경우, `DB` 와의 `Sync` 비용 발생
+> - `Redis` 사용 시 반드시 `Failover` 에 대한 고려
+> ex) `Redis` 장애 시 데이터베이스에서 조회, `Redis` 이중화 및 백업
+<hr>
+
+## Redis (Remote Dictionary Server) CLI
+> - <b>Redis CLI</b>  
+> `$ docker exec -it {Container ID} redis-cli --raw`  // Redis CLI 로 접속  
+> - <b>String 자료 구조 (Key - Value)</b>  
+> `$ set id 10`  // Key (id) 의 Value 를 10으로 저장  
+> `$ get id`  // Key 조회  
+> `$ del id`  // Key 삭제  
+> `$ scan 0`  // Key 들을 일정 단위 개수 만큼씩 조회
+> - <b>Hash 자료 구조 (Key - subKey - Value)</b>  
+> `$ hgetall USER`  // Key (User) 의 매핑되는 모든 필드와 값들을 조회  
+> `$ hset USER subkey value`  // Key (User) 의 subKey 의 값을 지정  
+> `$ hget USER subkey`  // Key (User) 의 subKey 의 값을 조회  
+<hr>
+
 ## 프로젝트 관련 학습 자료
 <details>
 <summary><b>내용 상세 보기 (클릭) </b></summary>
