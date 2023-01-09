@@ -48,9 +48,9 @@ public class PharmacyRecommendationService {
         // 위치(위도, 경도) 기반 데이터로 변환된 주소
         DocumentDto documentDto = kakaoApiResponseDto.getDocumentDtoList().get(0);
 
-        // 거리 계산 알고리즘을 통해 가장 가까운 약국 목록(3개)
-        // List<Direction> directionList = directionService.buildDirectionList(documentDto);
-        List<Direction> directionList = directionService.buildDirectionListByCategoryApi(documentDto);
+        // 거리 계산 알고리즘을 통해 가장 가까운 약국 목록 조회(3개)
+        List<Direction> directionList = directionService.buildDirectionList(documentDto);
+        // List<Direction> directionList = directionService.buildDirectionListByCategoryApi(documentDto);
 
         return directionService.saveAll(directionList)
                 .stream()

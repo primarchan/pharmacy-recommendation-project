@@ -26,6 +26,7 @@ public class PharmacySearchService {
         List<PharmacyDto> pharmacyDtoList = pharmacyRedisTemplateService.findAll();
 
         if (!pharmacyDtoList.isEmpty()) {
+            log.info("Redis findAll success!");
             return pharmacyDtoList;
         }
 
